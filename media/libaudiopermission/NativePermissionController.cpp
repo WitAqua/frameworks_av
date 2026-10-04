@@ -48,6 +48,10 @@ static std::optional<std::string> getFixedPackageName(uid_t uid) {
             return "audioserver";
         case AID_CAMERASERVER:
             return "cameraserver";
+        // Not an AppOpsService value: bootanimation runs as graphics and plays the boot sound
+        // before system_server has populated the package map.
+        case AID_GRAPHICS:
+            return "graphics";
         default:
             return std::nullopt;
     }
