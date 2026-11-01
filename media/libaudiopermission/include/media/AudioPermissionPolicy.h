@@ -38,6 +38,9 @@ inline bool skipOpsForUid(uid_t uid) {
         case AID_MEDIA:
         case AID_AUDIOSERVER:
         case AID_CAMERASERVER:
+        // bootanimation plays the boot sound as graphics. It has no package for appops to
+        // track, so OP_CONTROL_AUDIO would never be granted and the sound would be muted.
+        case AID_GRAPHICS:
             return true;
         default:
             return false;
